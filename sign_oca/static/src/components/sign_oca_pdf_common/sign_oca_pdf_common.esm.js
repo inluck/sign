@@ -41,6 +41,11 @@ export default class SignOcaPdfCommon extends Component {
         this.info = await this.orm.call(this.model, "get_info", [[this.res_id]]);
     }
     waitIframeLoaded() {
+        if (!this.iframe.el || !this.iframe.el.contentDocument) {
+            // Iframe not ready yet, retry
+            setTimeout(() => this.waitIframeLoaded(), 50);
+            return;
+        }
         var error = this.iframe.el.contentDocument.getElementById("errorWrapper");
         if (error && window.getComputedStyle(error).display !== "none") {
             this.iframeLoaded.resolve();
