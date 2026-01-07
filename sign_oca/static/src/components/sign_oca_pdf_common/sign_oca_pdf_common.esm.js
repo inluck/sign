@@ -12,7 +12,9 @@ export default class SignOcaPdfCommon extends Component {
         this.orm = useService("orm");
         this.field_template = "sign_oca.sign_iframe_field";
         this.pdf_url = this.getPdfUrl();
-        this.viewer_url = "/web/static/lib/pdfjs/web/viewer.html?file=" + this.pdf_url;
+        this.viewer_url =
+            "/web/static/lib/pdfjs/web/viewer.html?file=" +
+            encodeURIComponent(this.pdf_url);
         this.iframe = useRef("sign_oca_iframe");
         var iframeResolve = "";
         var iframeReject = "";
